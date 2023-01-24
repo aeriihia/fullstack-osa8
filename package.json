@@ -1,0 +1,23 @@
+{
+  "name": "fullstack-osa8",
+  "version": "1.0.0",
+  "description": "",
+  "main": "library-backend.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aeriihia/fullstack-osa8.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aeriihia/fullstack-osa8/issues"
+  },
+  "homepage": "https://github.com/aeriihia/fullstack-osa8#readme",
+  "dependencies": {
+    "apollo-server": "^3.10.1",
+    "graphql": "^16.6.0"
+  }
+}
