@@ -160,16 +160,20 @@ const resolvers = {
     allBooks: async (root, args) => {
       if (args.author && args.genre) {
         const author = await Author.findOne({ name: args.author })
-        return Book.find({ author: author, "genres": args.genre })
+        const books = Book.find({ author: author, "genres": args.genre }).populate('author')
+        return books
       }
       if (args.author) {
         const author = await Author.findOne({ name: args.author })
-        return Book.find({ author: author })
+        const books = Book.find({ author: author }).populate('author')
+        return books
       }
       if (args.genre) {
-        return Book.find({ "genres": args.genre })
+        const books = Book.find({ "genres": args.genre }).populate('author')
+        return books
       }
-      return Book.find({})
+      const books = Book.find({}).populate('author')
+      return books
     },
     allAuthors: async () => Author.find({}),
     me: (root, args, context) => {

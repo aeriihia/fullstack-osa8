@@ -10,17 +10,17 @@ const Authors = (props) => {
 
   const [ changeAuthor, result ] = useMutation(EDIT_AUTHOR)
 
-  if (!props.show) {
-    return null
-  }
-
-  const authors = props.authors
-
   useEffect(() => {
     if (result.data && result.data.editAuthor === null) {
       console.log('author not found')
     }
   }, [result.data]) // eslint-disable-line 
+
+  if (!props.show) {
+    return null
+  }
+
+  const authors = props.authors
 
   const submit = async (event) => {
     event.preventDefault()
