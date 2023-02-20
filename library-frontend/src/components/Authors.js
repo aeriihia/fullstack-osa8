@@ -8,7 +8,7 @@ const Authors = (props) => {
   const [name, setName] = useState('')
   const [born, setBorn] = useState('')
 
-  const [ changeAuthor, result ] = useMutation(EDIT_AUTHOR)
+  const [changeAuthor, result] = useMutation(EDIT_AUTHOR)
 
   useEffect(() => {
     if (result.data && result.data.editAuthor === null) {
@@ -24,7 +24,6 @@ const Authors = (props) => {
 
   const submit = async (event) => {
     event.preventDefault()
-
     changeAuthor({ variables: { name, born: parseInt(born) } })
 
     setName('')
@@ -50,24 +49,27 @@ const Authors = (props) => {
           ))}
         </tbody>
       </table>
-      <h3>Set birthyear</h3>
-      <form onSubmit={submit}>
-        <div>
-          <select value={name} onChange={({ target }) => setName(target.value)}>
-            {authors.map(a => {
-              return (<option key={a.name} value={a.name}>{a.name}</option>)
-            })}
-          </select>
-        </div>
-        <div>
-          born
-          <input
-            value={born}
-            onChange={({ target }) => setBorn(target.value)}
-          />
-        </div>
-        <button type="submit">update author</button>
-      </form>
+      {props.token && <div>
+        <h3>Set birthyear</h3>
+        <form onSubmit={submit}>
+          <div>
+            <select value={name} onChange={({ target }) => setName(target.value)}>
+              <option key='empty' value=''></option>
+              {authors.map(a => {
+                return (<option key={a.name} value={a.name}>{a.name}</option>)
+              })}
+            </select>
+          </div>
+          <div>
+            born
+            <input
+              value={born}
+              onChange={({ target }) => setBorn(target.value)}
+            />
+          </div>
+          <button type="submit">update author</button>
+        </form>
+      </div>}
     </div>
   )
 }
