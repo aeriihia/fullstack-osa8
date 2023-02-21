@@ -7,7 +7,7 @@ const Books = (props) => {
 
   useEffect(() => {
     let allGenres = ['all genres']
-    for (let b of books) {
+    for (let b of props.books) {
       for (let g of b.genres) {
         if (!allGenres.includes(g)) {
           allGenres.push(g)
