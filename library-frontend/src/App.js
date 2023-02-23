@@ -4,9 +4,9 @@ import Books from './components/Books'
 import NewBook from './components/NewBook'
 import LoginForm from './components/LoginForm'
 import Recommend from './components/Recommend'
-import { useQuery, useApolloClient } from '@apollo/client'
+import { useQuery, useApolloClient, useSubscription } from '@apollo/client'
 
-import { ALL_AUTHORS, ALL_BOOKS, ME } from './queries'
+import { ALL_AUTHORS, ALL_BOOKS, ME, BOOK_ADDED } from './queries'
 
 const App = () => {
   const [page, setPage] = useState('authors')
@@ -15,6 +15,13 @@ const App = () => {
   const all_books = useQuery(ALL_BOOKS)
   const user = useQuery(ME)
   const client = useApolloClient()
+
+  useSubscription(BOOK_ADDED, {
+    onData: ({ data }) => {
+      const book = data.data.bookAdded
+      window.alert("New book added: " + book.author.name + ", " + book.title + ", " + book.published + ", " + book.genres.join(", "))
+    }
+  })
 
   if (all_authors.loading || all_books.loading)  {
     return <div>loading...</div>
